@@ -28,6 +28,16 @@ public interface BuitemsApi {
                                     @Part("lat") RequestBody lat,
                                     @Part("long") RequestBody longitude);
 
+    @Multipart
+    @POST("update_event")
+    Call<AddEventResponse> updateEvent(@Part("id") RequestBody id,
+                                       @Part("name") RequestBody name,
+                                       @Part("guest") RequestBody guest,
+                                       @Part("location") RequestBody location,
+                                       @Part("date") RequestBody date,
+                                       @Part("lat") RequestBody lat,
+                                       @Part("long") RequestBody longitude);
+
     @GET("search_event")
     Call<SearchEventResponse> searchEvent(@Query("name") String name,
                                           @Query("date") String date);

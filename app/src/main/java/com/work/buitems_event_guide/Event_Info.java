@@ -9,14 +9,16 @@ import android.widget.TextView;
 
 import com.work.buitems_event_guide.model.Event;
 import com.work.buitems_event_guide.util.AppConstants;
+import com.work.buitems_event_guide.util.Helpers;
 
+import static com.work.buitems_event_guide.util.AppConstants.KEY_EVENT_ID;
 import static com.work.buitems_event_guide.util.AppConstants.KEY_EVENT_OBJ;
 
 public class Event_Info extends Activity {
     private static final String TAG = "Event_Info";
 
     private TextView eventName, chiefGuest, dateTime, location;
-    private Button mapButton;
+    private Button mapButton, editBtn;
     Event event;
 
     @Override
@@ -42,6 +44,15 @@ public class Event_Info extends Activity {
             }
         });
 
+        editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Event_Info.this, EditEventActivity.class);
+                intent.putExtra(KEY_EVENT_OBJ, event);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -51,5 +62,12 @@ public class Event_Info extends Activity {
         dateTime = findViewById(R.id.date_time);
         mapButton = findViewById(R.id.go_to_map);
         location = findViewById(R.id.event_location);
+        editBtn = findViewById(R.id.edit_btn);
+
+        if (Helpers.isUserLogin(this)){
+            editBtn.setVisibility(View.VISIBLE);
+        }else {
+            editBtn.setVisibility(View.GONE);
+        }
     }
 }

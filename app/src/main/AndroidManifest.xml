@@ -15,28 +15,31 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="stateHidden">
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/map.api" />
-
-        <activity android:name=".MainActivity">
+        <activity android:name=".SplashActivity"
+            android:theme="@style/AppThemeComp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/map.api" />
+
+        <activity android:name=".MainActivity">
+
+        </activity>
         <activity android:name=".Admin_login" />
         <activity android:name=".Event_Info" />
-        <activity android:name=".Map" />
-        <activity android:name=".EditEventActivity"
-            android:theme="@style/AppThemeComp"/>
-        <activity android:name=".Add_Event" />
+        <activity
+            android:name=".EditEventActivity"
+            android:theme="@style/AppThemeComp" />
         <activity android:name=".Event_Edit" />
         <activity
             android:name=".mapActivity"
-            android:label="Map Guide"></activity>
+            android:label="Map Guide" />
     </application>
 
 </manifest>
