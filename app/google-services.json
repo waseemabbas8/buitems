@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1057066771038",
+    "firebase_url": "https://kohat-aabf5.firebaseio.com",
+    "project_id": "kohat-aabf5",
+    "storage_bucket": "kohat-aabf5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057066771038:android:2ebdd248bf01e093",
+        "android_client_info": {
+          "package_name": "com.work.buitems_event_guide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057066771038-p9b40lngoieccd8c2k2iejn2qh86ju0d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_vTzKgVKNKu1u_KlmuXqyBFkN9v6ZV_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057066771038-p9b40lngoieccd8c2k2iejn2qh86ju0d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

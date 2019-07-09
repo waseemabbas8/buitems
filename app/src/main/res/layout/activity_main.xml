@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#8ed3f4"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <TextView
+        android:id="@+id/TextView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="#6099e8"
+        android:text="User Panel"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/admin_login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TextView1"
+        android:layout_margin="10dp"
+        style="@style/ButtonStyle"
+        android:text="Goto Admin"
+        android:textColor="@android:color/background_light" />
+
+    <ListView
+        android:id="@+id/events_list"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_search"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="#8ed3f4">
+
+    </ListView>
+
+    <EditText
+        android:id="@+id/et_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="109dp"
+        android:ems="10"
+        android:hint="Search by Name or Date"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        tools:background="@android:color/transparent" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
