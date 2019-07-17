@@ -8,4 +8,6 @@ public class AppConstants {
     public static final String KEY_EVENT_ID = "event_id";
 
     public static final String STATUS_SUCCESS = "1";
+
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 }

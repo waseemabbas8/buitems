@@ -22,8 +22,57 @@ public class Event implements Serializable {
     @Expose
     private String eventDate;
 
+    @SerializedName("longitude")
+    private String longitude;
+
     @SerializedName("latitude")
     private String lat;
+
+    @SerializedName("moderator")
+    private String moderator;
+
+    @SerializedName("speaker")
+    private String speaker;
+
+    @SerializedName("focal_person")
+    private String focalPerson;
+
+    @SerializedName("status")
+    private String status;
+
+
+
+    public String getModerator() {
+        return moderator;
+    }
+
+    public void setModerator(String moderator) {
+        this.moderator = moderator;
+    }
+
+    public String getSpeaker() {
+        return speaker;
+    }
+
+    public void setSpeaker(String speaker) {
+        this.speaker = speaker;
+    }
+
+    public String getFocalPerson() {
+        return focalPerson;
+    }
+
+    public void setFocalPerson(String focalPerson) {
+        this.focalPerson = focalPerson;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getLat() {
         return lat;
@@ -40,9 +89,6 @@ public class Event implements Serializable {
     public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
-
-    @SerializedName("longitude")
-    private String longitude;
 
     public String getEventId() {
         return eventId;

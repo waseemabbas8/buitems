@@ -1,7 +1,7 @@
 package com.work.buitems_event_guide;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,6 +15,7 @@ import com.work.buitems_event_guide.api.BuitemsApi;
 import com.work.buitems_event_guide.api.WebServices;
 import com.work.buitems_event_guide.model.AddEventResponse;
 import com.work.buitems_event_guide.model.Event;
+import com.work.buitems_event_guide.model.EventStatus;
 import com.work.buitems_event_guide.model.MyPlace;
 import com.work.buitems_event_guide.ui.DatePickerFragment;
 import com.work.buitems_event_guide.util.Helpers;
@@ -34,12 +35,14 @@ public class EditEventActivity extends AppCompatActivity {
 
     private static final String TAG = "EditEventActivity";
 
-    private EditText chiefGuest, name, dateTime;
-    private Spinner location;
+    private EditText chiefGuest, name, dateTime, mod, speaker, focal;
+    private Spinner location, eventStatus;
     private Button submit;
 
     private List<MyPlace> locationsList = SampleData.getLocations();
     private MyPlace selectedLocation = locationsList.get(0);
+    private EventStatus selectedStatus = EventStatus.OnTime;
+
     BuitemsApi apiService = WebServices.create();
 
     private Event event;
@@ -98,6 +101,9 @@ public class EditEventActivity extends AppCompatActivity {
         String chief = chiefGuest.getText().toString();
         String eventName = name.getText().toString();
         String eventDateTime = dateTime.getText().toString();
+        String moderator = mod.getText().toString();
+        String focalPerson = focal.getText().toString();
+        String speakerPerson = speaker.getText().toString();
 
         if (chief.isEmpty()){
             chiefGuest.setError("Please Enter this field");
@@ -120,8 +126,12 @@ public class EditEventActivity extends AppCompatActivity {
         RequestBody mSelctedLocation = RequestBody.create(MediaType.parse("text/plain"), selectedLocation.getTitle());
         RequestBody mLat = RequestBody.create(MediaType.parse("text/plain"), Double.toString(selectedLocation.getLatLng().latitude));
         RequestBody mLong = RequestBody.create(MediaType.parse("text/plain"), Double.toString(selectedLocation.getLatLng().longitude));
+        RequestBody mMode = RequestBody.create(MediaType.parse("text/plain"), moderator);
+        RequestBody mSpeaker = RequestBody.create(MediaType.parse("text/plain"), speakerPerson);
+        RequestBody mFocal = RequestBody.create(MediaType.parse("text/plain"), focalPerson);
+        RequestBody mStatus = RequestBody.create(MediaType.parse("text/plain"), Integer.toString(selectedStatus.getValue()));
 
-        Call call = apiService.addEvent(mEventName, mChief, mSelctedLocation, mEventDateTime, mLat, mLong);
+        Call call = apiService.addEvent(mEventName, mChief, mSelctedLocation, mEventDateTime, mLat, mLong, mMode, mSpeaker, mFocal, mStatus);
         call.enqueue(new Callback<AddEventResponse>(){
 
             @Override
@@ -154,6 +164,9 @@ public class EditEventActivity extends AppCompatActivity {
         String chief = chiefGuest.getText().toString();
         String eventName = name.getText().toString();
         String eventDateTime = dateTime.getText().toString();
+        String moderator = mod.getText().toString();
+        String focalPerson = focal.getText().toString();
+        String speakerPerson = speaker.getText().toString();
 
         if (chief.isEmpty()){
             chiefGuest.setError("Please Enter this field");
@@ -177,8 +190,12 @@ public class EditEventActivity extends AppCompatActivity {
         RequestBody mLat = RequestBody.create(MediaType.parse("text/plain"), Double.toString(selectedLocation.getLatLng().latitude));
         RequestBody mLong = RequestBody.create(MediaType.parse("text/plain"), Double.toString(selectedLocation.getLatLng().longitude));
         RequestBody mId = RequestBody.create(MediaType.parse("text/plain"), event.getEventId());
+        RequestBody mMode = RequestBody.create(MediaType.parse("text/plain"), moderator);
+        RequestBody mSpeaker = RequestBody.create(MediaType.parse("text/plain"), speakerPerson);
+        RequestBody mFocal = RequestBody.create(MediaType.parse("text/plain"), focalPerson);
+        RequestBody mStatus = RequestBody.create(MediaType.parse("text/plain"), Integer.toString(selectedStatus.getValue()));
 
-        Call call = apiService.updateEvent(mId, mEventName, mChief, mSelctedLocation, mEventDateTime, mLat, mLong);
+        Call call = apiService.updateEvent(mId, mEventName, mChief, mSelctedLocation, mEventDateTime, mLat, mLong, mMode, mSpeaker, mFocal, mStatus);
         call.enqueue(new Callback<AddEventResponse>(){
 
             @Override
@@ -210,9 +227,10 @@ public class EditEventActivity extends AppCompatActivity {
         ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_item, SampleData.getLocations());
 
+        ArrayAdapter statusAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, EventStatus.values());
+
         location.setAdapter(spinnerArrayAdapter);
-
-
         location.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -224,6 +242,19 @@ public class EditEventActivity extends AppCompatActivity {
                 selectedLocation = locationsList.get(0);
             }
         });
+
+        eventStatus.setAdapter(statusAdapter);
+        eventStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                selectedStatus = EventStatus.valueOf(position+1);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                selectedStatus = EventStatus.valueOf(1);
+            }
+        });
     }
 
     private void initViews() {
@@ -231,12 +262,19 @@ public class EditEventActivity extends AppCompatActivity {
         name = findViewById(R.id.event_name);
         dateTime = findViewById(R.id.et_date);
         location = findViewById(R.id.sp_location);
+        mod = findViewById(R.id.moderator);
+        speaker = findViewById(R.id.speaker);
+        focal = findViewById(R.id.focal_person);
+        eventStatus = findViewById(R.id.event_status);
         submit = findViewById(R.id.btn_submit);
 
         if (event != null){
             chiefGuest.setText(event.getCheifGuest());
             name.setText(event.getEventName());
             dateTime.setText(event.getEventDate());
+            mod.setText(event.getModerator());
+            speaker.setText(event.getSpeaker());
+            focal.setText(event.getFocalPerson());
         }
 
     }

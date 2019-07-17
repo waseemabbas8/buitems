@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">BUITEMS Event Guide</string>
+
+    <!--<array name="event_status">-->
+        <!--<item>On Time</item>-->
+        <!--<item>Delayed</item>-->
+        <!--<item>Passed</item>-->
+        <!--<item>Canceled</item>-->
+    <!--</array>-->
 </resources>

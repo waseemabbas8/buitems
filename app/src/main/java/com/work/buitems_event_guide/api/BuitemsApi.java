@@ -26,7 +26,11 @@ public interface BuitemsApi {
                                     @Part("location") RequestBody location,
                                     @Part("date") RequestBody date,
                                     @Part("lat") RequestBody lat,
-                                    @Part("long") RequestBody longitude);
+                                    @Part("long") RequestBody longitude,
+                                    @Part("mod") RequestBody mod,
+                                    @Part("speak") RequestBody speaker,
+                                    @Part("focal") RequestBody focal,
+                                    @Part("status") RequestBody status);
 
     @Multipart
     @POST("update_event")
@@ -36,7 +40,11 @@ public interface BuitemsApi {
                                        @Part("location") RequestBody location,
                                        @Part("date") RequestBody date,
                                        @Part("lat") RequestBody lat,
-                                       @Part("long") RequestBody longitude);
+                                       @Part("long") RequestBody longitude,
+                                       @Part("mod") RequestBody mod,
+                                       @Part("speak") RequestBody speaker,
+                                       @Part("focal") RequestBody focal,
+                                       @Part("status") RequestBody status);
 
     @GET("search_event")
     Call<SearchEventResponse> searchEvent(@Query("name") String name,
