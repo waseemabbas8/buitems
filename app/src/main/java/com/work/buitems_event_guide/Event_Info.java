@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.work.buitems_event_guide.model.Event;
+import com.work.buitems_event_guide.model.EventStatus;
 import com.work.buitems_event_guide.util.AppConstants;
 import com.work.buitems_event_guide.util.Helpers;
 
@@ -17,7 +18,7 @@ import static com.work.buitems_event_guide.util.AppConstants.KEY_EVENT_OBJ;
 public class Event_Info extends Activity {
     private static final String TAG = "Event_Info";
 
-    private TextView eventName, chiefGuest, dateTime, location;
+    private TextView eventName, chiefGuest, dateTime, location, moderator, focal, speaker, status;
     private Button mapButton, editBtn;
     Event event;
 
@@ -34,6 +35,17 @@ public class Event_Info extends Activity {
         chiefGuest.setText(event.getCheifGuest());
         dateTime.setText(event.getEventDate());
         location.setText(event.getEventLocation());
+        focal.setText(event.getFocalPerson());
+        moderator.setText(event.getModerator());
+        speaker.setText(event.getSpeaker());
+
+        int statusIndex = Integer.valueOf(event.getStatus());
+        if ( statusIndex < EventStatus.values().length && statusIndex > -1){
+            String eventStatus = EventStatus.values()[statusIndex].toString();
+            status.setText(eventStatus);
+        }else {
+            status.setText("Error");
+        }
 
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +75,10 @@ public class Event_Info extends Activity {
         mapButton = findViewById(R.id.go_to_map);
         location = findViewById(R.id.event_location);
         editBtn = findViewById(R.id.edit_btn);
+        moderator = findViewById(R.id.txt_moderator);
+        focal = findViewById(R.id.txt_focal);
+        speaker = findViewById(R.id.txt_speaker);
+        status = findViewById(R.id.txt_status);
 
         if (Helpers.isUserLogin(this)){
             editBtn.setVisibility(View.VISIBLE);

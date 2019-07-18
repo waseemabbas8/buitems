@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="colorOnTime">#4CAF50</color>
+    <color name="colorDelayed">#FF4081</color>
+    <color name="colorPassed">#3F51B5</color>
+    <color name="colorCanceled">#FF0303</color>
 </resources>
