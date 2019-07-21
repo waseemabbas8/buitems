@@ -46,6 +46,10 @@ public interface BuitemsApi {
                                        @Part("focal") RequestBody focal,
                                        @Part("status") RequestBody status);
 
+    @Multipart
+    @POST("forgotpssword")
+    Call<LoginResponse> forgotPassword(@Part("email") RequestBody email);
+
     @GET("search_event")
     Call<SearchEventResponse> searchEvent(@Query("name") String name,
                                           @Query("date") String date);

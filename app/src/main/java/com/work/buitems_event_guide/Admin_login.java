@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.work.buitems_event_guide.api.BuitemsApi;
 import com.work.buitems_event_guide.api.WebServices;
 import com.work.buitems_event_guide.model.LoginResponse;
+import com.work.buitems_event_guide.ui.ForgetPasswordDialog;
 import com.work.buitems_event_guide.util.Helpers;
 
 import retrofit2.Call;
@@ -28,11 +31,12 @@ import retrofit2.Response;
 import static com.work.buitems_event_guide.util.AppConstants.KEY_USER_LOGIN;
 import static com.work.buitems_event_guide.util.AppConstants.STATUS_SUCCESS;
 
-public class Admin_login extends Activity {
+public class Admin_login extends AppCompatActivity {
 
     private EditText mUserName;
     private EditText mPassword;
     private Button mSignIn;
+    private TextView forgetPassword;
 
     BuitemsApi apiService = WebServices.create();
 
@@ -53,12 +57,21 @@ public class Admin_login extends Activity {
             }
         });
 
+        forgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ForgetPasswordDialog dialog = new ForgetPasswordDialog();
+                dialog.show(getSupportFragmentManager(), "Forgot Password");
+            }
+        });
+
     }
 
     private void intViews(){
         mUserName = findViewById(R.id.login_user_name);
         mPassword = findViewById(R.id.login_password);
         mSignIn = findViewById(R.id.btn_sign_in);
+        forgetPassword = findViewById(R.id.txt_forgot_password);
     }
 
     private void resetSignBtn(){

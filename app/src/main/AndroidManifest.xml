@@ -31,7 +31,8 @@
         <activity android:name=".MainActivity">
 
         </activity>
-        <activity android:name=".Admin_login" />
+        <activity android:name=".Admin_login"
+            android:theme="@style/AppThemeComp"/>
         <activity android:name=".Event_Info" />
         <activity
             android:name=".EditEventActivity"
